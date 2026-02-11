@@ -4,17 +4,16 @@ import binascii
 
 def stretch_key(password, salt=None):
     if salt is None:
-        salt = os.urandom(16)  # generate random salt
+        salt = os.urandom(16)  
 
-    # PBKDF2 parameters
     iterations = 100_000
-    key_length = 32  # bytes
+    key_length = 32  
 
     stretched_key = hashlib.pbkdf2_hmac(
-        'sha256',                 # hash algorithm
-        password.encode(),        # password
-        salt,                     # salt
-        iterations,               # iterations (stretching)
+        'sha256',                 
+        password.encode(),        
+        salt,                     
+        iterations,               
         dklen=key_length
     )
 
@@ -38,4 +37,5 @@ if __name__ == "__main__":
     if verify_password(check, salt, stretched):
         print("Password Verified")
     else:
+
         print("Wrong Password")
